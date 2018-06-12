@@ -33,6 +33,9 @@ class FlaskFrappe(object):
             username=app.config.get('FRAPPE_USERNAME'),
             password=app.config.get('FRAPPE_PASSWORD')
         )
+        if not hasattr(app, 'extensions'):
+            app.extensions = {}
+        app.extensions['frappeclient'] = self
 
     def __getattr__(self, name):
         """Proxy methods to the private held object
